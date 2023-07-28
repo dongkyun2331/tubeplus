@@ -1,0 +1,94 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+}
+/*  페이지 중앙에 배치되는 200px*200px 크기의 div 3개 생성*/
+.box {
+  width: 200px;
+  height: 200px;
+}
+
+#box1 {
+  background-color: #000;
+}
+/* 기본 배경색 #f90으로 설정.
+ */
+/* transition 속성 부여하지 말 것. */
+#box2 {
+  background-color: #f90;
+}
+/* 기본 배경색 #aaa로 설정. */
+#box3 {
+  background-color: #aaa;
+  z-index: 1;
+}
+/* 해당 div 내부에 200px*100px 크기의 div 2개 생성. */
+.box3div {
+  width: 200px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+/* 반응형 레이아웃 배치 */
+@media screen and (max-width: 768px) {
+  /* 768px 이하에서는 3개의 div를 세로 배치 */
+  .container {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+  /*  768px 이상, 1280px 이하에서는 3개의 div를 가로 배치, 각 div 간 20px의 간격이 있도록 설정 */
+  .container {
+    gap: 20px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  /* 1280px 이상에서는 각 div 사이에 40px의 간격이 있도록 하며, 항상 유지되는 2px, #000 색상의 border 설정 */
+  .container {
+    gap: 40px;
+  }
+
+  .box {
+    border: 2px solid #000;
+  }
+
+  #box1 {
+    /* 기본 배경색 #000 으로 설정. */
+    background-color: #000;
+    position: relative;
+    overflow: hidden;
+  }
+  /* 오버랩 박스의 배경색은 white 기반 투명도 20%이며, 색상값 #fff 및 2px 너비의 border 설정, 내부 텍스트 색상은 #fff로 설정. */
+  .overlay-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #fff;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+  /* 3-1 div의 텍스트는 ::before 가상태그로 출력. */
+  .click-counter::before {
+    content: "페이지 전체에서 클릭한 횟수:";
+  }
+  /* 3-2 div의 텍스트는 ::after 가상태그로 출력. */
+  .click-counter3::after {
+    content: ":3번 div를 클릭한 횟수";
+  }
+}
